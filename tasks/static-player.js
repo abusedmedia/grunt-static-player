@@ -26,9 +26,8 @@ module.exports = function(grunt) {
       if(!isPartial){
         var file = grunt.file.read(src);
         var compiled = checkPartials(file, f.orig.cwd)  
-        console.log(compiled)
-
-        var processed = grunt.template.process(compiled, options);
+        console.log(src)
+        var processed = grunt.template.process(compiled, options.data);
         grunt.file.write(f.dest, processed);
       }    
     });

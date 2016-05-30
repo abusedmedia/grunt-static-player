@@ -1,7 +1,7 @@
 {
   "name": "grunt-static-player",
   "description": "Bake partials with lodash templating",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "homepage": "https://github.com/abusedmedia/grunt-static-player",
   "author": {
     "name": "abusedmedia",

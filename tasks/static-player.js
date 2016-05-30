@@ -24,16 +24,16 @@ module.exports = function(grunt) {
       var src = f.src[0];
       var isPartial = (options.excludePartialNotation && src.match(/\/_.*.htm/g))
       if(!isPartial){
-        var file = grunt.file.read(src);
-        var compiled = checkPartials(file, f.orig.cwd)  
         console.log(src)
+        var file = grunt.file.read(src);
+        var compiled = checkPartials(file, path.dirname(src), f.orig.cwd)  
         var processed = grunt.template.process(compiled, options.data);
         grunt.file.write(f.dest, processed);
       }    
     });
 
 
-    function checkPartials(file, cwd){
+    function checkPartials(file, base, cwd){
       var newfile = file
       var tags = file.match(/<\w+\s+(process).*?>(.*?)<\/.*?>/g)
       console.log(tags)
@@ -47,14 +47,17 @@ module.exports = function(grunt) {
               var clean_val = val[0].replace(/"/g, '').replace(/'/g, '')
               //console.log(clean_val)
 
-              var filepart = grunt.file.read(cwd + '/' + clean_val);
+
+              var npath = path.join(base, clean_val)
+              console.log(base, clean_val, npath)
+              var filepart = grunt.file.read(npath);
               //console.log(filepart)
 
               file = file.replace(tag, filepart)
 
               var parttag = filepart.match(/<\w+\s+(process).*?>(.*?)<\/.*?>/g)
               if(parttag){
-                file = checkPartials(file, cwd)
+                file = checkPartials(file, base, cwd)
               }
             }
         })

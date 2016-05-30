@@ -12,7 +12,24 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
 
-    json_generator: {
+    static_player: {
+
+      examples: {
+
+        options: {
+          data: {data: {title:'Title', items:[{name:'A'},{name:'B'}]} },
+          excludePartialNotation:true
+        },
+
+        files: [
+          {
+            expand: true,
+            cwd: 'examples',
+            src: ['*/*.html'], 
+            dest: 'dest/'
+          }
+        ]
+      },
 
       partials_in_folder: {
 
@@ -26,7 +43,7 @@ module.exports = function(grunt) {
             expand: true,
             cwd: 'test/test_1',
             src: ['*.html', '*/*.html', '!partials/*.html'], 
-            dest: 'dest/'
+            dest: 'dest/test_1'
           }
         ]
       },
@@ -43,7 +60,7 @@ module.exports = function(grunt) {
             expand: true,
             cwd: 'test/test_2',
             src: ['*.html', '*/*.html'], 
-            dest: 'dest/'
+            dest: 'dest/test_2'
           }
         ]
       }
@@ -56,7 +73,9 @@ module.exports = function(grunt) {
   // Actually load this plugin's task(s).
   grunt.loadTasks('tasks');
 
-  grunt.registerTask('a', ['json_generator:partials_in_folder']);
-  grunt.registerTask('b', ['json_generator:partials_not_organized']);
+  grunt.registerTask('examples', ['static_player:examples']);
+  grunt.registerTask('a', ['static_player:partials_in_folder']);
+  grunt.registerTask('b', ['static_player:partials_not_organized']);
+  grunt.registerTask('all', ['examples', 'a', 'b']);
 
 };

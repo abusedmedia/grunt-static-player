@@ -16,7 +16,7 @@ module.exports = function(grunt) {
 
   grunt.registerMultiTask('static_player', 'Bake partials with lodash templating', function() {
     
-    var options = this.options({data: null, excludePartialNotation:false});
+    var options = this.options({data: null, excludePartialNotation:false, basepath:null});
 
     var data = options.data;
 
@@ -26,14 +26,14 @@ module.exports = function(grunt) {
       if(!isPartial){
         console.log(src)
         var file = grunt.file.read(src);
-        var compiled = checkPartials(file, path.dirname(src), f.orig.cwd)  
+        var compiled = checkPartials(file, path.dirname(src))  
         var processed = grunt.template.process(compiled, options.data);
         grunt.file.write(f.dest, processed);
       }    
     });
 
 
-    function checkPartials(file, base, cwd){
+    function checkPartials(file, base){
       var newfile = file
       var tags = file.match(/<\w+\s+(process).*?>(.*?)<\/.*?>/g)
       console.log(tags)
@@ -47,8 +47,13 @@ module.exports = function(grunt) {
               var clean_val = val[0].replace(/"/g, '').replace(/'/g, '')
               //console.log(clean_val)
 
-
-              var npath = path.join(base, clean_val)
+              var npath = ''
+              if(options.basepath){
+                npath = path.join(options.basepath, clean_val)
+              }else{
+                npath = path.join(base, clean_val)
+              }
+              
               console.log(base, clean_val, npath)
               var filepart = grunt.file.read(npath);
               //console.log(filepart)
@@ -57,7 +62,7 @@ module.exports = function(grunt) {
 
               var parttag = filepart.match(/<\w+\s+(process).*?>(.*?)<\/.*?>/g)
               if(parttag){
-                file = checkPartials(file, base, cwd)
+                file = checkPartials(file, base)
               }
             }
         })

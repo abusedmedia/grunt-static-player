@@ -1,0 +1,47 @@
+{
+  "name": "grunt-static-player",
+  "description": "Bake partials with lodash templating",
+  "version": "0.0.1",
+  "homepage": "https://github.com/abusedmedia/grunt-static-player",
+  "author": {
+    "name": "abusedmedia",
+    "email": "ff@todo.to.it"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/abusedmedia/grunt-static-player.git"
+  },
+  "bugs": {
+    "url": "https://github.com/abusedmedia/grunt-static-player/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/abusedmedia/grunt-static-player/blob/master/LICENSE-MIT"
+    }
+  ],
+  "scripts": {
+    "tag": "npm version patch && git push --tags"
+  },
+  "engines": {
+    "node": ">= 0.12.0"
+  },
+  "dependencies": {
+    "lodash": "~2.4.1"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "^0.9.2",
+    "grunt-contrib-clean": "^0.5.0",
+    "grunt-contrib-nodeunit": "^0.3.3",
+    "grunt": "~0.4.5"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.5"
+  },
+  "keywords": [
+    "gruntplugin",
+    "json",
+    "templating",
+    "array"
+  ]
+}

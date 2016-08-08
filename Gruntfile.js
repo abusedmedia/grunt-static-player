@@ -17,7 +17,7 @@ module.exports = function(grunt) {
       examples: {
 
         options: {
-          data: {data: {title:'Title', items:[{name:'A'},{name:'B'}]} },
+          data: {data: {title:'Title', items:[{name:'A'},{name:'B'}], html:'<ul><li>Item</li></ul>'} },
           excludePartialNotation:true
         },
 

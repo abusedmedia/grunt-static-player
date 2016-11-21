@@ -17,6 +17,12 @@ Once the plugin has been installed, it may be enabled inside your Gruntfile with
 grunt.loadNpmTasks('grunt-static-player’);
 ```
 
+### To update the package on the registry
+
+Tag with ```npm run tag``` then ```npm publish```
+
+ 
+
 ## The “static_player” task
 
 ### Overview

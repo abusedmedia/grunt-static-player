@@ -58,8 +58,7 @@ module.exports = function(grunt) {
               var filepart = grunt.file.read(npath);
 
               if(keep){
-                var kept = tag.replace(/>.*<\//g, '>' + filepart + '<')
-                console.log(tag)
+                var kept = tag.replace(/>.*<\//g, '>' + filepart + '</')
                 file = file.replace(tag, kept)
               }else{
                 file = file.replace(tag, filepart)

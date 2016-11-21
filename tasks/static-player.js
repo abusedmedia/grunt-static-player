@@ -24,7 +24,7 @@ module.exports = function(grunt) {
       var src = f.src[0];
       var isPartial = (options.excludePartialNotation && src.match(/\/_.*.htm/g))
       if(!isPartial){
-        console.log(src)
+        //console.log(src)
         var file = grunt.file.read(src);
         var compiled = checkPartials(file, path.dirname(src))  
         var processed = grunt.template.process(compiled, options.data);
@@ -36,16 +36,16 @@ module.exports = function(grunt) {
     function checkPartials(file, base){
       var newfile = file
       var tags = file.match(/<\w+.+(process).*?>(.*?)<\/.*?>/g)
-      console.log(tags)
+      //console.log(tags)
       if(tags){
         tags.forEach(function(d, i){
             var tag = tags[i]
             var attr = tag.match(/process="([^"]+)"/g)
-            //console.log(attr)
+            var keep = tag.match(/process-keep/g)
+            
             if(attr){
               var val = attr[0].match(/([",'])(.+)([",'])/g)
               var clean_val = val[0].replace(/"/g, '').replace(/'/g, '')
-              //console.log(clean_val)
 
               var npath = ''
               if(options.basepath){
@@ -54,11 +54,17 @@ module.exports = function(grunt) {
                 npath = path.join(base, clean_val)
               }
               
-              console.log(base, clean_val, npath)
+              //console.log(base, clean_val, npath)
               var filepart = grunt.file.read(npath);
-              //console.log(filepart)
 
-              file = file.replace(tag, filepart)
+              if(keep){
+                var kept = tag.replace(/>.*<\//g, '>' + filepart + '<')
+                console.log(tag)
+                file = file.replace(tag, kept)
+              }else{
+                file = file.replace(tag, filepart)
+              }
+              
 
               var parttag = filepart.match(/<\w+\s+(process).*?>(.*?)<\/.*?>/g)
               if(parttag){

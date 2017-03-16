@@ -57,8 +57,10 @@ module.exports = function(grunt) {
               //console.log(base, clean_val, npath)
               var filepart = grunt.file.read(npath);
 
+
               if(keep){
-                var kept = tag.replace(/>.*<\//g, '>' + filepart + '</')
+                var kept = tag.replace(/process=/g, 'procesd=')
+                kept = kept.replace(/>.*<\//g, '>' + filepart + '</')
                 file = file.replace(tag, kept)
               }else{
                 file = file.replace(tag, filepart)

@@ -78,4 +78,5 @@ module.exports = function(grunt) {
   grunt.registerTask('b', ['static_player:partials_not_organized']);
   grunt.registerTask('all', ['examples', 'a', 'b']);
 
+
 };

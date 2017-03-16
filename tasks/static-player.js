@@ -56,7 +56,7 @@ module.exports = function(grunt) {
               
               //console.log(base, clean_val, npath)
               var filepart = grunt.file.read(npath);
-
+              filepart = filepart.replace(/<!--[\s\S]*?-->/gm, '')  // remove commented html chunks
 
               if(keep){
                 var kept = tag.replace(/process=/g, 'procesd=')

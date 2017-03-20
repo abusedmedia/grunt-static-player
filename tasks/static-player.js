@@ -35,7 +35,7 @@ module.exports = function(grunt) {
 
     function checkPartials(file, base){
       var newfile = file
-      var tags = file.match(/<\w+.+(process).*?>(.*?)<\/.*?>/g)
+      var tags = file.match(/<\w+.(process).*?>(.*?)<\/.*?>/g)
       //console.log(tags)
       if(tags){
         tags.forEach(function(d, i){
@@ -58,14 +58,15 @@ module.exports = function(grunt) {
               var filepart = grunt.file.read(npath);
               filepart = filepart.replace(/<!--[\s\S]*?-->/gm, '')  // remove commented html chunks
 
+
               if(keep){
                 var kept = tag.replace(/process=/g, 'procesd=')
+                kept = kept.replace(/process-keep/g, 'procesd-keep')
                 kept = kept.replace(/>.*<\//g, '>' + filepart + '</')
                 file = file.replace(tag, kept)
               }else{
                 file = file.replace(tag, filepart)
               }
-              
 
               var parttag = filepart.match(/<\w+.+(process).*?>(.*?)<\/.*?>/g)
               if(parttag){

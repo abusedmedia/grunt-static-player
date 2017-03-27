@@ -35,7 +35,7 @@ module.exports = function(grunt) {
 
     function checkPartials(file, base){
       var newfile = file
-      var tags = file.match(/<\w+.(process).*?>(.*?)<\/.*?>/g)
+      var tags = file.match(/<.+.(process).*?>(.*?)<\/.*?>/g)
       //console.log(tags)
       if(tags){
         tags.forEach(function(d, i){

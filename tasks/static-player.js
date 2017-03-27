@@ -68,7 +68,7 @@ module.exports = function(grunt) {
                 file = file.replace(tag, filepart)
               }
 
-              var parttag = filepart.match(/<\w+.+(process).*?>(.*?)<\/.*?>/g)
+              var parttag = filepart.match(/<.+.+(process).*?>(.*?)<\/.*?>/g)
               if(parttag){
                 file = checkPartials(file, base)
               }

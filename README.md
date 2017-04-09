@@ -1,4 +1,4 @@
-# grunt-static-player
+# grunt-static-player [![npm version](https://badge.fury.io/js/grunt-static-player.svg)](https://badge.fury.io/js/grunt-static-player)
 
 > Simply let you to generate static files based on json array.
 

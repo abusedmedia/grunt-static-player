@@ -6,26 +6,36 @@
  * Licensed under the MIT license.
  */
 
-'use strict';
+'use strict'
 
-module.exports = function(grunt) {
-
+module.exports = function (grunt) {
   grunt.initConfig({
 
     static_player: {
 
+      test: {
+        files: [
+          {
+            expand: true,
+            cwd: 'examples/10_svg_big',
+            src: ['*.html'],
+            dest: 'dest/'
+          }
+        ]
+      },
+
       examples: {
 
         options: {
-          data: {data: {title:'Title', items:[{name:'A'},{name:'B'}], html:'<ul><li>Item</li></ul>'} },
-          excludePartialNotation:true
+          data: {data: {title: 'Title', items: [{name: 'A'}, {name: 'B'}], html: '<ul><li>Item</li></ul>'} },
+          excludePartialNotation: true
         },
 
         files: [
           {
             expand: true,
             cwd: 'examples',
-            src: ['*/*.html'], 
+            src: ['*/*.html'],
             dest: 'dest/'
           }
         ]
@@ -34,15 +44,15 @@ module.exports = function(grunt) {
       partials_in_folder: {
 
         options: {
-          data: {title:'HEY'},
-          excludePartialNotation:false
+          data: {title: 'HEY'},
+          excludePartialNotation: false
         },
 
         files: [
           {
             expand: true,
             cwd: 'test/test_1',
-            src: ['*.html', '*/*.html', '!partials/*.html'], 
+            src: ['*.html', '*/*.html', '!partials/*.html'],
             dest: 'dest/test_1'
           }
         ]
@@ -51,32 +61,30 @@ module.exports = function(grunt) {
       partials_not_organized: {
 
         options: {
-          data: {title:'HEY'},
-          excludePartialNotation:true
+          data: {title: 'HEY'},
+          excludePartialNotation: true
         },
 
         files: [
           {
             expand: true,
             cwd: 'test/test_2',
-            src: ['*.html', '*/*.html'], 
+            src: ['*.html', '*/*.html'],
             dest: 'dest/test_2'
           }
         ]
       }
 
-
     }
 
-  });
+  })
 
   // Actually load this plugin's task(s).
-  grunt.loadTasks('tasks');
+  grunt.loadTasks('tasks')
 
-  grunt.registerTask('examples', ['static_player:examples']);
-  grunt.registerTask('a', ['static_player:partials_in_folder']);
-  grunt.registerTask('b', ['static_player:partials_not_organized']);
-  grunt.registerTask('all', ['examples', 'a', 'b']);
-
-
-};
+  grunt.registerTask('examples', ['static_player:examples'])
+  grunt.registerTask('t', ['static_player:test'])
+  grunt.registerTask('a', ['static_player:partials_in_folder'])
+  grunt.registerTask('b', ['static_player:partials_not_organized'])
+  grunt.registerTask('all', ['examples', 'a', 'b'])
+}

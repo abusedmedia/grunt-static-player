@@ -58,7 +58,8 @@ module.exports = function (grunt) {
               npath = path.join(base, clean_val)
             }
 
-              // console.log(base, clean_val, npath)
+            var ext = path.extname(clean_val).toLowerCase()
+
             var filepart = grunt.file.read(npath)
             filepart = filepart.replace(/<!--[\s\S]*?-->/gm, '')  // remove commented html chunks
 
@@ -71,9 +72,12 @@ module.exports = function (grunt) {
               file = file.replace(tag, filepart)
             }
 
-            var parttag = filepart.match(/<.+.+(process).*?>(.*?)<\/.*?>/g)
-            if (parttag) {
-              file = checkPartials(file, base)
+            if (ext !== '.svg') {
+              var parttag = filepart.match(/<.+.+(process).*?>(.*?)<\/.*?>/g)
+
+              if (parttag) {
+                file = checkPartials(file, base)
+              }
             }
           }
         })
